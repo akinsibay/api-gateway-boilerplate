@@ -14,9 +14,9 @@ const customErrorHandler = (err,req,res,next)=>{
     if(err.name === "CastError"){
         customError = new CustomError("Please provide a valid id",400)
     }
-    console.log(customError.message,customError.status)
+    console.log(customError.message,customError.status || customError.response.status)
     
-    res.status(customError.status || 500) //customError.status yoksa 500 ver
+    res.status(customError.status || customError.response.status || 500) //customError.status yoksa 500 ver
     .json({
         success: false,
         message:customError.message || "Internal server error"

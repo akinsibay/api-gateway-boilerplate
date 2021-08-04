@@ -12,7 +12,7 @@ export const verifyAccessToken = (req, res, next) => {
 		if (err) {
 			return next(new CustomError("Error in token verify", 403));
 		}
-		req.payload = payload;
+		req.user = payload;
 		next();
 	});
 };

@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import router from "./routers/router";
 import logger from "morgan";
 import cors from "cors";
+import helmet from "helmet";
+import limitAccess from './middlewares/limitAccess'
 import customErrorHandler from "./middlewares/customErrorHandler";
 import connectDatabase from "./helpers/connectDatabase";
 const app = express();
@@ -18,6 +20,11 @@ const PORT = process.env.PORT || 5000;
 connectDatabase();
 app.use(logger("dev"));
 app.use(cors());
+app.use(helmet());
+app.use(limitAccess({
+  windowMs: 10 * 60 * 1000, // 10 Minutes
+  max: 500  
+}))
 app.use(cookieParser());
 app.use(express.json());
 app.use("/", router);
@@ -29,7 +36,7 @@ app.use(function (req, res, next) {
 app.use(customErrorHandler);
 
 app.listen(PORT, () => {
-  console.log(`App started on ${PORT}: ${process.env.NODE_ENV} `);
+  console.log(`Gateway started on ${PORT}: ${process.env.NODE_ENV} `);
 });
 
 export default app;
