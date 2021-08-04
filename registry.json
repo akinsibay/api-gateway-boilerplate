@@ -1,0 +1,28 @@
+{
+    "services":{
+        "users":{
+            "apiName":"users",
+            "host":"http://localhost",
+            "port":5001,
+            "url":"http://localhost:5001/users/"
+        },
+        "teams":{
+            "apiName":"teams",
+            "host":"http://localhost",
+            "port":5001,
+            "url":"http://localhost:5001/teams/"
+        },
+        "projects":{
+            "apiName":"projects",
+            "host":"http://localhost",
+            "port":5001,
+            "url":"http://localhost:5001/projects/"
+        },
+        "flows":{
+            "apiName":"flows",
+            "host":"http://localhost",
+            "port":5001,
+            "url":"http://localhost:5001/flows/"
+        }
+    }
+}

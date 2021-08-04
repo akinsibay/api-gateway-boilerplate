@@ -1,0 +1,29 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+        "brace-style": [
+            "error",
+            "stroustrup"
+        ],
+        // "comma-dangle": [
+        //     "error",
+        //     "never"
+        // ],
+        "no-unused-vars": "warn",
+        "no-var": "warn",
+        "array-callback-return":"warn",
+        "class-methods-use-this": "warn",
+        "eqeqeq":"warn",
+        "no-case-declarations":"warn",
+        "no-empty-pattern":"warn",
+        "no-new-wrappers":"warn"
+    }
+}
