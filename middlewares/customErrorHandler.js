@@ -1,26 +1,26 @@
-import CustomError from "../helpers/CustomError";
-const customErrorHandler = (err,req,res,next)=>{
+import ErrorClass from "../helpers/ErrorClass";
+const customErrorHandler = (err, req, res, next) => {
     let customError = err;
-    console.log("name", err.name);
-    if(err.name==="SyntaxError"){
-        customError = new CustomError("Unexpected Syntax",400);
+    console.log("Error Name: ", err.name);
+    if (err.name === "SyntaxError") {
+        customError = new ErrorClass("Unexpected Syntax", 400);
     }
-    if(err.name==="ValidationError"){
-        customError = new CustomError(err.message,400);
+    if (err.name === "ValidationError") {
+        customError = new ErrorClass(err.message, 400);
     }
-    if(err.code === 11000){
-        customError = new CustomError("Duplicate Key Found: Check your input",400)
+    if (err.code === 11000) {
+        customError = new ErrorClass("Duplicate Key Found: Check your input", 400)
     }
-    if(err.name === "CastError"){
-        customError = new CustomError("Please provide a valid id",400)
+    if (err.name === "CastError") {
+        customError = new ErrorClass("Please provide a valid id", 400)
     }
-    console.log(customError.message,customError.status || customError.response.status)
+    console.log(customError.message, customError.status || customError.response.status)
     
     res.status(customError.status || customError.response.status || 500) //customError.status yoksa 500 ver
-    .json({
-        success: false,
-        message:customError.message || "Internal server error"
-    })
-}
+        .json({
+            success: false,
+            message: customError.response?.data.message || customError.message || "Internal server error"
+        })
+};
 
 export default customErrorHandler;
